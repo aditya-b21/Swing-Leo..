@@ -2,6 +2,5 @@ services:
   - type: web
     name: swing-scribe-dashboard
     env: static
-    rootDir: swing-scribe-mainfolder/swing-scribe-dashboard-main
-    buildCommand: npm run build
+    buildCommand: cd swing-scribe-mainfolder/swing-scribe-dashboard-main && npm install && npm run build
     staticPublishPath: dist
