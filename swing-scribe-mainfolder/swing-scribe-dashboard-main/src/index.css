@@ -1,0 +1,357 @@
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary-blue: #1e40af;
+  --dark-blue: #1e3a8a;
+  --accent-blue: #3b82f6;
+  --text-primary: #ffffff;
+  --text-secondary: #d1d5db;
+  --dark-bg: #000000;
+  --dark-surface: #111111;
+  --card-bg: #1a1a1a;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  background: #000000;
+  color: var(--text-primary);
+  min-height: 100vh;
+}
+
+/* Enhanced Glass Effect with Dark Theme */
+.glass-effect {
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(20px);
+  border: 2px solid rgba(59, 130, 246, 0.3);
+  box-shadow: 0 8px 32px rgba(59, 130, 246, 0.1);
+}
+
+/* Blue Gradient Text */
+.text-gradient {
+  background: linear-gradient(135deg, var(--primary-blue), var(--accent-blue));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Enhanced Button Animations */
+.btn-animated {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateY(0);
+}
+
+.btn-animated::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(30, 64, 175, 0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.btn-animated:hover::before {
+  left: 100%;
+}
+
+.btn-animated:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 10px 25px rgba(30, 64, 175, 0.4);
+}
+
+.btn-animated:active {
+  transform: translateY(0) scale(0.98);
+  transition: transform 0.1s ease;
+}
+
+/* Interactive Button Glow */
+.btn-glow {
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.btn-glow:hover {
+  box-shadow: 
+    0 0 20px rgba(30, 64, 175, 0.6),
+    0 0 40px rgba(30, 64, 175, 0.4),
+    0 0 60px rgba(30, 64, 175, 0.2);
+  animation: pulse-glow 1.5s infinite alternate;
+}
+
+@keyframes pulse-glow {
+  0% {
+    box-shadow: 
+      0 0 20px rgba(30, 64, 175, 0.6),
+      0 0 40px rgba(30, 64, 175, 0.4);
+  }
+  100% {
+    box-shadow: 
+      0 0 30px rgba(30, 64, 175, 0.8),
+      0 0 60px rgba(30, 64, 175, 0.6),
+      0 0 80px rgba(30, 64, 175, 0.3);
+  }
+}
+
+/* Gradient Buttons */
+.gradient-blue {
+  background: linear-gradient(135deg, #1e40af, #1e3a8a);
+  color: #ffffff;
+  border: none;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.gradient-blue:hover {
+  background: linear-gradient(135deg, #1e3a8a, #1e40af);
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 15px 30px rgba(30, 64, 175, 0.5);
+}
+
+.gradient-blue::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.6s ease;
+}
+
+.gradient-blue:hover::after {
+  left: 100%;
+}
+
+.gradient-dark {
+  background: linear-gradient(135deg, #1a1a1a, #333333);
+  color: #1e40af;
+  border: 2px solid #1e40af;
+  transition: all 0.3s ease;
+}
+
+.gradient-dark:hover {
+  background: linear-gradient(135deg, #333333, #1a1a1a);
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 15px 30px rgba(30, 64, 175, 0.3);
+}
+
+/* Ripple Effect */
+.btn-ripple {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-ripple::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(30, 64, 175, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.4s, height 0.4s;
+}
+
+.btn-ripple:active::after {
+  width: 300px;
+  height: 300px;
+}
+
+/* Shine Animation */
+.shine-animation {
+  position: relative;
+  overflow: hidden;
+}
+
+.shine-animation:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(30, 64, 175, 0.2), transparent);
+  animation: shine 3s infinite;
+}
+
+@keyframes shine {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+/* Card Hover Effects */
+.card-hover {
+  transition: all 0.4s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 
+    0 20px 40px rgba(30, 64, 175, 0.2),
+    0 0 60px rgba(30, 64, 175, 0.1);
+}
+
+/* Interactive Input Fields */
+input:focus, textarea:focus, select:focus {
+  outline: none;
+  border-color: var(--primary-blue) !important;
+  box-shadow: 0 0 20px rgba(30, 64, 175, 0.2);
+  transform: scale(1.02);
+  transition: all 0.3s ease;
+}
+
+/* Theme Colors */
+.bg-dark-bg { background-color: var(--dark-bg); }
+.bg-dark-surface { background-color: var(--dark-surface); }
+.bg-card-bg { background-color: var(--card-bg); }
+.text-text-primary { color: var(--text-primary); }
+.text-text-secondary { color: var(--text-secondary); }
+.text-accent-blue { color: var(--primary-blue); }
+.border-blue { border-color: var(--primary-blue); }
+
+/* Enhanced Scrollbar */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1a1a1a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #3b82f6, #1e40af);
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #1e40af, #3b82f6);
+}
+
+/* Loading Animation */
+.loading-spinner {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Floating Animation */
+.float-animation {
+  animation: float 4s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-15px); }
+}
+
+/* Fade In Animation */
+.fade-in {
+  animation: fadeIn 0.8s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+/* Interactive Delete Button */
+.delete-btn {
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.delete-btn:hover {
+  transform: scale(1.1) rotate(5deg);
+  box-shadow: 0 8px 25px rgba(239, 68, 68, 0.4);
+}
+
+.delete-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.delete-btn:hover::before {
+  left: 100%;
+}
+
+/* Dashboard specific animations */
+.dashboard-card {
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.9), rgba(26, 26, 26, 0.8));
+  border: 2px solid rgba(30, 64, 175, 0.3);
+  transition: all 0.4s ease;
+}
+
+.dashboard-card:hover {
+  background: linear-gradient(135deg, rgba(26, 26, 26, 0.9), rgba(51, 51, 51, 0.8));
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 15px 35px rgba(30, 64, 175, 0.3);
+  border-color: var(--primary-blue);
+}
+
+/* Enhanced Button Hover States */
+button {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+button:hover {
+  transform: translateY(-2px);
+}
+
+button:active {
+  transform: translateY(0) scale(0.98);
+}
+
+/* Pulsing Effect for Important Elements */
+.pulse-blue {
+  animation: pulse-blue 2s infinite;
+}
+
+@keyframes pulse-blue {
+  0%, 100% {
+    box-shadow: 0 0 10px rgba(30, 64, 175, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 25px rgba(30, 64, 175, 0.7), 0 0 35px rgba(30, 64, 175, 0.4);
+  }
+}
+
+/* Calculator Theme */
+.calculator-theme {
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.9), rgba(26, 26, 26, 0.8));
+  border: 2px solid rgba(30, 64, 175, 0.4);
+  box-shadow: 0 10px 30px rgba(30, 64, 175, 0.2);
+}
