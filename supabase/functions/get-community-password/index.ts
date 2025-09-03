@@ -38,29 +38,27 @@ serve(async (req) => {
       )
     }
 
-    // If no password is set, return the default and also set it in the database
-    let currentPassword = data?.password || 'SwingScribe1234@'
+    // If no password is set in DB, fall back to environment variable
+    let currentPassword = data?.password
     
-    if (!data) {
-      console.log('No password found in database, setting default...')
-      // Set the default password in the database
-      const { error: insertError } = await supabaseClient
-        .from('community_settings')
-        .insert({
-          key: 'community_password',
-          password: 'SwingScribe1234@'
-        })
-      
-      if (insertError) {
-        console.error('Error setting default password:', insertError)
+    if (!currentPassword) {
+      const envPassword = Deno.env.get('COMMUNITY_PASSWORD');
+      if (envPassword) {
+        currentPassword = envPassword;
+        console.log('Using community password from environment variable.');
       } else {
-        console.log('Default password set successfully')
+        console.error('No community password found in database or environment variables.');
+        return new Response(
+          JSON.stringify({ error: 'Community password not configured.' }),
+          { 
+            status: 500,
+            headers: { ...corsHeaders, 'Content-Type': 'application/json' }
+          }
+        );
       }
-      
-      currentPassword = 'SwingScribe1234@'
     }
-
-    console.log('Current password retrieved:', currentPassword)
+    
+    console.log('Current password retrieved (length):', currentPassword.length)
 
     return new Response(
       JSON.stringify({ password: currentPassword }),

@@ -68,17 +68,34 @@ interface LatestShareholdingPattern {
   retailInvestors: number;
 }
 
-export function AIChatbot() {
+interface ChatbotUIProps {
+  stockSymbol: string;
+  financialData: FinancialData | null;
+  setFinancialData: React.Dispatch<React.SetStateAction<FinancialData | null>>;
+  loading: boolean;
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  error: string | null;
+  setError: React.Dispatch<React.SetStateAction<string | null>>;
+}
+
+// Ensure environment variables are loaded for API keys
+const FMP_API_KEY = import.meta.env.VITE_FMP_API_KEY;
+const MOBULA_API_KEY = import.meta.env.VITE_MOBULA_API_KEY;
+const GEMINI_API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
+
+if (!FMP_API_KEY || !MOBULA_API_KEY || !GEMINI_API_KEY) {
+  console.error("API keys are not defined. Please set VITE_FMP_API_KEY, VITE_MOBULA_API_KEY, and VITE_GEMINI_API_KEY in your environment variables.");
+  // You might want to throw an error or handle this more gracefully in a production app
+  // For now, we'll let it proceed but expect functionality issues.
+}
+
+const FMP_BASE_URL = 'https://financialmodelingprep.com/api/v3';
+const GEMINI_API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${GEMINI_API_KEY}`;
+
+export function AIChatbot({ stockSymbol, financialData, setFinancialData, loading, setLoading, error, setError }: ChatbotUIProps) {
   const [stockSymbol, setStockSymbol] = useState('');
   const [loading, setLoading] = useState(false);
   const [financialData, setFinancialData] = useState<FinancialData | null>(null);
-
-  // API Keys and URLs
-  const FMP_API_KEY = 'YfeHcp82voXeXFV3tubEo5BMh0ZfMHpl';
-  const FMP_BASE_URL = 'https://financialmodelingprep.com/api/v3';
-  const MOBULA_API_KEY = '184e1f78-0818-4866-9dde-97c07e3e453f';
-  const GEMINI_API_KEY = 'AIzaSyAdpM1oV0kj6GMPMebhhpjh7B3sNQC1p-o';
-  const GEMINI_API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${GEMINI_API_KEY}`;
 
   const handleGetInsights = async () => {
     if (!stockSymbol) {
